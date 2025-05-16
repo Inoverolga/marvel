@@ -1,0 +1,46 @@
+@import "../../index.scss";
+.singlecomic {
+    margin-top: 50px;
+    &__wrapper {
+        display: flex;
+        column-gap: 50px;
+    }
+    &__content {
+        &-text {
+            width: 550px;
+            margin-top: 28px;
+            @include fz400-18;
+        }
+        &-page {
+            margin-top: 40px;
+            @include fz400-18;
+        }
+        &-language {
+            margin-top: 28px;
+            @include fz400-18;
+        }
+        &-price {
+            margin-top: 28px;
+            @include fz700-24;
+            color: $red;
+        }
+        &-title {
+            display: flex;
+            justify-content: space-between;
+            column-gap: 127px;
+            &-first {
+                @include fz700-22;
+                width: 550px;
+            }
+            &-second {
+                @include fz700-18;
+            }
+        }
+    }
+
+    &__img {
+        width: 293px;
+        //   height: 450px;
+        object-fit: cover;
+    }
+}

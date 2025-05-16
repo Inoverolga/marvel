@@ -1,0 +1,12 @@
+@import "../../index.scss";
+
+.char__content {
+    display: flex;
+    margin-top: 50px;
+    column-gap: 25px;
+    &-forma {
+        display: flex;
+        row-gap: 30px;
+        flex-flow: column;
+    }
+}

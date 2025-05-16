@@ -1,0 +1,89 @@
+@import "../../index.scss";
+@import "../../style/button.scss";
+
+.randomChar {
+    margin-top: 54px;
+    display: flex;
+    box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
+    background: $ligtht;
+
+    &__info-block {
+        width: calc(100% / 2);
+        padding: 35px 35px 35px 40px;
+        display: flex;
+        column-gap: 30px;
+        &-img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+        }
+    }
+    &__cta-block {
+        position: relative;
+        box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
+        background: $grey;
+        width: calc(100% / 2);
+        padding: 35px 35px 35px 40px;
+        &-text {
+            @include fz700-24;
+            color: $ligtht;
+            &-second {
+                margin-top: 41px;
+            }
+        }
+        &-button {
+            margin-top: 17px;
+        }
+        &-decoration {
+            &-shield {
+                position: absolute;
+                left: 383px;
+                top: 136px;
+                width: 100px;
+                height: 100px;
+            }
+            &-mjolnir {
+                position: absolute;
+                left: 423.27px;
+                top: 73.27px;
+                width: 136px;
+                height: 136px;
+                transform: rotate(-56deg);
+            }
+        }
+    }
+    &__content {
+        max-width: 265px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        //   row-gap: 13px;
+        align-content: start;
+        &-characters {
+            @include fz700-22;
+            color: $dark;
+        }
+        &-text {
+            @include fz400-14;
+            color: $dark;
+            // white-space: nowrap; /* Запрещаем перенос строк */
+            // overflow: hidden; /* Скрываем содержимое, выходящее за границы */
+            // text-overflow: ellipsis;
+            // width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Количество строк */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &-buttonBlock {
+            display: flex;
+            column-gap: 30px;
+        }
+    }
+    .spinner,
+    .error {
+        margin: 0 auto;
+        min-width: 550px;
+    }
+}

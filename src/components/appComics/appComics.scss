@@ -1,0 +1,55 @@
+@import "../../index.scss";
+.appcomics {
+    margin-top: 49px;
+    &__list-flex {
+        display: flex;
+        column-gap: 67px;
+        row-gap: 57px;
+        flex-wrap: wrap;
+    }
+    &__flex {
+        &-item {
+            // width: calc(100% - (67px * 3) / 4);
+            width: calc(25% - 51px);
+            // width: calc(25% - (67px * 3) / 4);
+            //             Расшифровка:
+            // 25%
+            // Это означает, что каждый элемент должен занимать 25% ширины родительского контейнера.
+
+            // Для 4 элементов в строке: 100% / 4 = 25% на каждый элемент
+
+            // 51px
+            // Это компенсация для учёта промежутков (gap) между элементами:
+
+            // У вас задан column-gap: 67px (расстояние между элементами)
+
+            // Для 4 элементов будет 3 промежутка
+
+            // Общая ширина промежутков на строку: 67px × 3 = 201px
+
+            // Компенсация на один элемент: 201px / 4 = 50.25px → округляем до 51px
+            // 67px * 3 = 201px (общий gap на строку)
+
+            // 201px / 4 = 50.25px (компенсация на элемент)
+            max-height: max-content;
+        }
+        &-img {
+            width: 100%;
+            height: 346px;
+            box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+            object-fit: cover;
+        }
+        &-name {
+            margin-top: 10px;
+            @include fz700-14;
+            text-align: start;
+        }
+
+        &-price {
+            margin-top: 9px;
+            @include fz700-14;
+            text-align: start;
+            color: rgba(0, 0, 0, 0.6);
+        }
+    }
+}

@@ -1,0 +1,37 @@
+@import "../../index.scss";
+.charList {
+    &__flex {
+        width: 100%;
+        min-width: 650px;
+        min-height: fit-content;
+        display: flex;
+        flex-flow: wrap;
+        column-gap: 25px;
+        row-gap: 30px;
+        &-item {
+            width: calc((100% - 50px) / 3);
+
+            background-color: $grey;
+            min-height: 318px;
+            box-shadow: 5px 5px 10px 0 rgba(0, 0, 0, 0.25);
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0 20px 5px $red;
+            }
+        }
+        &-img {
+            width: 100%;
+            height: 200px;
+        }
+        &-name {
+            padding: 15px;
+            color: $ligtht;
+            @include fz700-22;
+            text-transform: uppercase;
+        }
+    }
+    .spinner,
+    .error {
+        margin: 0 auto;
+    }
+}

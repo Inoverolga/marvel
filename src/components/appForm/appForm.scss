@@ -1,0 +1,29 @@
+@import "../../index.scss";
+
+.appform {
+    padding: 25px;
+    width: 100%;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+    background: $ligtht;
+    &__name {
+        @include fz700-18;
+    }
+    &-wrapper {
+        display: flex;
+        column-gap: 24px;
+        margin-top: 15px;
+    }
+    &__input {
+        border: none;
+        padding: 10.45px 10px;
+
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+        background: $ligtht;
+        width: 250px;
+        // height: 38px;
+        &::placeholder {
+            @include fz400-14;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+}

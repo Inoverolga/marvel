@@ -1,0 +1,54 @@
+@import "../../index.scss";
+.charInfo {
+    padding: 25px;
+    //     max-width: 425px;
+    width: 100%;
+    //max-height: max-content;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+    background: $ligtht;
+
+    &__content {
+        &-description {
+            margin-top: 15px;
+            @include fz400-14;
+        }
+        &-title {
+            margin-top: 10px;
+            @include fz700-18;
+        }
+        &-comicsList {
+            margin-top: 13px;
+            display: flex;
+            flex-flow: column;
+            row-gap: 10px;
+            &-item {
+                padding: 4px 10px 3px 4px;
+                width: 375px;
+                box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+                background: $ligtht;
+                @include fz400-14;
+            }
+        }
+    }
+    .randomChar__info-block {
+        padding: 0;
+        column-gap: 25px;
+    }
+
+    .randomChar__info-block-img {
+        max-width: 150px;
+        max-height: 150px;
+    }
+    .randomChar__content {
+        justify-content: space-between;
+    }
+    .randomChar__content-buttonBlock {
+        justify-content: space-between;
+        flex-flow: column;
+        row-gap: 10px;
+    }
+    .spinner,
+    .error {
+        margin: 0 auto;
+    }
+}

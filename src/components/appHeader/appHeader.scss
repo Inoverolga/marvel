@@ -1,0 +1,27 @@
+@import "../../index.scss";
+.header {
+    display: flex;
+    justify-content: space-between;
+    &__title {
+        @include fz700-28;
+        color: $red;
+        &-span {
+            color: $dark;
+            margin-left: 8px;
+        }
+    }
+    &__menu {
+        display: flex;
+        column-gap: 8px;
+        &-characters {
+            @include fz700-24;
+            color: $red;
+        }
+
+        &-comics,
+        &-slash {
+            @include fz700-24;
+            color: $dark;
+        }
+    }
+}

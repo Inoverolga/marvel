@@ -1,0 +1,124 @@
+@import "modern-normalize/modern-normalize.css";
+// Specify weight and style
+
+* {
+    font-family: "Roboto Condensed", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$ligtht: #ffffff;
+$dark: #000000;
+$grey: #232222;
+$red: #9f0013;
+$lighth-grey: #5c5c5c;
+
+@mixin fz700-28 {
+    font-weight: 700;
+    font-size: 28px;
+}
+
+@mixin fz700-24 {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+@mixin fz700-22 {
+    font-weight: 700;
+    font-size: 22px;
+}
+
+@mixin fz700-18 {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+@mixin fz700-14 {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+@mixin fz400-18 {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+@mixin fz400-14 {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+ul,
+li,
+dl {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    &:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.app {
+    //     box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.25);
+    //     background: $ligtht;
+    width: 1100px; //(1440-166-174)
+    margin: 0 auto; // по центру
+    padding: 50px 0 50px 0;
+    position: relative;
+    .bg-decoration {
+        position: absolute;
+        right: -174px;
+        bottom: -70px;
+        z-index: -1;
+    }
+}
+
+main {
+    //     margin-top: 50px;
+    position: relative;
+}
+
+.pulse {
+    animation: pulse 1.5s ease-in-out 0.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
