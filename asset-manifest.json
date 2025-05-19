@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/my-app/static/css/main.cd40bc11.css",
-    "main.js": "/my-app/static/js/main.c12fbb30.js",
+    "main.js": "/my-app/static/js/main.bd23ac5d.js",
     "static/media/x-men.png": "/my-app/static/media/x-men.41b39e1944f148b7a123.png",
     "static/media/UW.png": "/my-app/static/media/UW.422636b41d853d832a20.png",
     "static/media/vision.png": "/my-app/static/media/vision.067d4ae1936d64a577ce.png",
@@ -54,10 +54,10 @@
     "static/media/roboto-condensed-greek-ext-700-normal.woff": "/my-app/static/media/roboto-condensed-greek-ext-700-normal.e916823b47874a6d3a39.woff",
     "index.html": "/my-app/index.html",
     "main.cd40bc11.css.map": "/my-app/static/css/main.cd40bc11.css.map",
-    "main.c12fbb30.js.map": "/my-app/static/js/main.c12fbb30.js.map"
+    "main.bd23ac5d.js.map": "/my-app/static/js/main.bd23ac5d.js.map"
   },
   "entrypoints": [
     "static/css/main.cd40bc11.css",
-    "static/js/main.c12fbb30.js"
+    "static/js/main.bd23ac5d.js"
   ]
 }
