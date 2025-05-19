@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types"; // ES6
+
 import MarvelService from "../services/MarvelServic";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
@@ -81,6 +83,11 @@ class CharInfo extends Component {
         );
     }
 }
+
+//конструкция проверки типа данных
+CharInfo.propTypes = {
+    charId: PropTypes.number,
+};
 
 const View = ({ char }) => {
     const { name, thumbnail, description, homepage, wiki, comics } = char;
