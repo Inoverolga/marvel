@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-//import xmen from "../resourses/img/x-men.png";
-//import uw from "../resourses/img/UW.png";
+
 import useMarvelService from "../services/MarvelServic";
 import "./appComics.scss";
 import ErrorMessage from "../errorMessage/ErrorMessage";
@@ -12,7 +11,6 @@ const AppComics = (props) => {
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(0);
     const [charEnded, setCharEnded] = useState(false);
-    // const [initialLoad, setInitialLoad] = useState(false);
 
     const initialLoadRef = useRef(false); // ← блокируем повторные запросы
 
