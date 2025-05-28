@@ -1,88 +1,50 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types"; // ES6
 
-import MarvelService from "../services/MarvelServic";
+import useMarvelService from "../services/MarvelServic";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import Skeleton from "../skeleton/Skeleton";
 import "./charInfo.scss";
 
-class CharInfo extends Component {
-    state = {
-        char: null,
-        loading: false, // т.к. загрузка должны появляться только после действий пользователей
-        error: false, //новое состояние (ошибка)
-    };
+const CharInfo = (props) => {
+    const [char, setChar] = useState(null);
 
-    marvelServic = new MarvelService();
+    const { error, loading, getCharacter, clearError } = useMarvelService();
 
-    componentDidMount() {
-        this.upDateChar();
-    }
+    useEffect(() => {
+        upDateChar();
+    }, [props.charId]);
 
-    componentDidUpdate(prevProps, prevState) {
-        //когда меняется state
-        //prevProps и prevState - это предыдущее состояние
-        if (this.props.charId !== prevProps.charId) {
-            //очень важно Условие
-            this.upDateChar();
-        }
-    }
-    upDateChar = () => {
-        const { charId } = this.props;
+    const upDateChar = () => {
+        const { charId } = props;
         if (!charId) {
             return;
         }
-
-        this.onCharLoading(); //для того чтобы спинер также появился перед тем как будет отправлен запрос
-
-        this.marvelServic
-            .getCharacter(charId)
-            .then(this.onChartLoaded)
-            .catch(this.onError);
-
-        //this.foo.bar = 0; спецюошибка
+        clearError(); //перед тем как делаем новый запрос убираем ошибку
+        getCharacter(charId).then(onChartLoaded);
     };
 
-    onChartLoaded = (char) => {
-        //наш персонаж загрузился, убираем дублирование перезаписи в state(this.setState(res))
-        this.setState({ char, loading: false }); //аналог char: char;
+    const onChartLoaded = (char) => {
+        setChar(char);
     };
 
-    onCharLoading = () => {
-        this.setState({
-            loading: true,
-        });
-    };
+    //условный рендеринг
+    const skeleton = char || loading || error ? null : <Skeleton />; //начальное состояние
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || error || !char) ? <View char={char} /> : null;
 
-    onError = () => {
-        this.setState({
-            loading: false, // false т.к. если произошла ошибка, то нет загрузки
-            error: true,
-        });
-    };
-
-    render() {
-        const { char, loading, error } = this.state;
-        //условный рендеринг
-        const skeleton = char || loading || error ? null : <Skeleton />; //начальное состояние
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error || !char) ? (
-            <View char={char} />
-        ) : null;
-
-        return (
-            <section className="charInfo">
-                {skeleton}
-                {errorMessage}
-                {spinner}
-                {content}
-            </section>
-        );
-    }
-}
+    return (
+        <section className="charInfo">
+            {skeleton}
+            {errorMessage}
+            {spinner}
+            {content}
+        </section>
+    );
+};
 
 //конструкция проверки типа данных
 CharInfo.propTypes = {

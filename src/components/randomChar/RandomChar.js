@@ -1,100 +1,76 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import MarvelService from "../services/MarvelServic";
+import useMarvelService from "../services/MarvelServic";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./randomChar.scss";
 
-class RandomChar extends Component {
-    state = {
-        char: {},
-        loading: true,
-        error: false, //новое состояние (ошибка)
+const RandomChar = () => {
+    const [char, setChar] = useState({});
+
+    const { loading, error, getCharacter, clearError } = useMarvelService();
+
+    useEffect(() => {
+        upDateChar();
+        //   const timerId = setInterval(upDateChar, 5000);
+        //   return () => {
+        //       clearInterval(timerId);
+        //   };
+    }, []);
+
+    const onChartLoaded = (char) => {
+        setChar(char);
     };
 
-    marvelServic = new MarvelService();
-
-    componentDidMount() {
-        this.upDateChar();
-        //   this.timerId = setInterval(this.upDateChar, 3000);
-    }
-
-    componentWillUnmount() {
-        clearInterval(this.timerId);
-    }
-    onChartLoaded = (char) => {
-        //наш персонаж загрузился, убираем дублирование перезаписи в state(this.setState(res))
-        this.setState({ char, loading: false }); //аналог char: char;
-    };
-
-    onError = () => {
-        this.setState({
-            loading: false, // false т.к. если произошла ошибка, то нет загрузки
-            error: true,
-        });
-    };
-
-    upDateChar = () => {
+    const upDateChar = () => {
+        clearError();
         const id = Math.floor(Math.random() * (20 - 1) + 1); //конструкция для отображения рандомных чисел
-        this.setState({ loading: true });
-        this.marvelServic
-            .getCharacter(id)
-            .then(this.onChartLoaded)
-            .catch(this.onError); //если произошла ошибка
-
-        //   this.marvelServic.getAllCharacters().then((res) => console.log(res)); //запрос всех персонажей
+        console.log(id);
+        getCharacter(id).then(onChartLoaded);
     };
 
-    render() {
-        const { char, loading, error } = this.state;
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error) ? <View char={char} /> : null;
+    const errorMessage = error ? <ErrorMessage /> : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || error) ? <View char={char} /> : null;
 
-        //   логика: если идет загрузка, то спинер, если не идет загрузка,
-        //   то ошибка, если персанаж загрузился, то его отображение
-        return (
-            <section className="randomChar">
-                {errorMessage}
-                {spinner}
-                {content}
-                <div className="randomChar__cta-block">
-                    <p className="randomChar__cta-block-text">
-                        Random character for today! <br />
-                        Do you want to get to know him better?
-                    </p>
-                    <p className="randomChar__cta-block-text randomChar__cta-block-text-second">
-                        Or choose another one
-                    </p>
-                    <Link
-                        to="/"
-                        className="button button__main randomChar__cta-block-button"
-                    >
-                        <div
-                            className="inner"
-                            onClick={loading ? <Spinner /> : this.upDateChar}
-                        >
-                            TRY IT
-                        </div>
-                    </Link>
-                    <div className="randomChar__cta-block-decoration">
-                        <img
-                            className="randomChar__cta-block-decoration-shield"
-                            src={require("../resourses/img/shield.png")}
-                            alt="shield"
-                        />
-                        <img
-                            className="randomChar__cta-block-decoration-mjolnir"
-                            src={require("../resourses/img/mjolnir (1).png")}
-                            alt="mjolnir"
-                        />
+    return (
+        <section className="randomChar">
+            {errorMessage}
+            {spinner}
+            {content}
+            <div className="randomChar__cta-block">
+                <p className="randomChar__cta-block-text">
+                    Random character for today! <br />
+                    Do you want to get to know him better?
+                </p>
+                <p className="randomChar__cta-block-text randomChar__cta-block-text-second">
+                    Or choose another one
+                </p>
+                <Link
+                    to="/"
+                    className="button button__main randomChar__cta-block-button"
+                >
+                    <div className="inner" onClick={upDateChar}>
+                        TRY IT
                     </div>
+                </Link>
+                <div className="randomChar__cta-block-decoration">
+                    <img
+                        className="randomChar__cta-block-decoration-shield"
+                        src={require("../resourses/img/shield.png")}
+                        alt="shield"
+                    />
+                    <img
+                        className="randomChar__cta-block-decoration-mjolnir"
+                        src={require("../resourses/img/mjolnir (1).png")}
+                        alt="mjolnir"
+                    />
                 </div>
-            </section>
-        );
-    }
-}
+            </div>
+        </section>
+    );
+};
 
 const View = ({ char }) => {
     const { name, thumbnail, description, homepage, wiki } = char;

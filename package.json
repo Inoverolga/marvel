@@ -2,7 +2,7 @@
     "name": "marvel",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://myusername.github.io/my-app",
+    "homepage": "https://inoverolga.github.io/marvel",
     "dependencies": {
         "@fontsource/roboto-condensed": "^5.2.5",
         "@testing-library/dom": "^10.4.0",

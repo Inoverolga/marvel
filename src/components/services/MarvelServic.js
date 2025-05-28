@@ -1,34 +1,24 @@
-// создаем обычны класс на нативном js т.к. нам не нужны не пропсы ни стэйты
-class MarvelService {
-    _apiBase = "https://marvel-server-zeta.vercel.app/";
-    _apiKey = "apikey=d4eecb0c66dedbfae4eab45d312fc1df";
-    _baseOffset = "0"; //т.е. сколько персонажей мы пропустим
+import { useHttp } from "../../hooks/http.hook";
 
-    getResource = async (url) => {
-        let res = await fetch(url);
-        if (!res.ok) {
-            throw new Error(`Could not fetch ${url}, status: ${res.status}`);
-        }
-        return await res.json();
-    };
-    getAllCharacters = async (offset = this._baseOffset) => {
-        //по умолчанию 0, если мы ничего не передадим
-        const res = await this.getResource(
-            `${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`,
+const useMarvelService = () => {
+    const { loading, request, error, clearError } = useHttp();
+    const _apiBase = "https://marvel-server-zeta.vercel.app/";
+    const _apiKey = "apikey=d4eecb0c66dedbfae4eab45d312fc1df";
+    const _baseOffset = "0"; //т.е. сколько персонажей мы пропустим
+
+    const getAllCharacters = async (offset = _baseOffset) => {
+        const res = await request(
+            `${_apiBase}characters?limit=9&offset=${offset}&${_apiKey}`,
         );
-        return res.data.results.map(this._transformCharacter);
+        return res.data.results.map(_transformCharacter);
     };
 
-    getCharacter = async (id) => {
-        //т.к. функция getResiurce асинхронная, то мы должны дождать резуьтата
-        const res = await this.getResource(
-            `${this._apiBase}characters/${id}?${this._apiKey}`,
-        );
-        return this._transformCharacter(res.data.results[0]);
+    const getCharacter = async (id) => {
+        const res = await request(`${_apiBase}characters/${id}?${_apiKey}`);
+        return _transformCharacter(res.data.results[0]);
     };
 
-    _transformCharacter = (ichar) => {
-        //получили данные с сервера и вернули (трансформировали) в том виде в котором нам они нужны
+    const _transformCharacter = (ichar) => {
         return {
             id: ichar.id,
             name: ichar.name,
@@ -39,6 +29,34 @@ class MarvelService {
             comics: ichar.comics.items,
         };
     };
-}
 
-export default MarvelService;
+    const getAllComics = async (offset = _baseOffset) => {
+        const res = await request(
+            `${_apiBase}comics?limit=8&offset=${offset}&${_apiKey}`,
+        );
+        return res.data.results.map(_transformCharacterOFComics);
+    };
+
+    const _transformCharacterOFComics = (item) => {
+        return {
+            id: item.id,
+            title: item.title,
+            thumbnail: item.thumbnail.path + "." + item.thumbnail.extension, //картинка
+            price:
+                item.prices && item.prices[0]
+                    ? item.prices[0].price
+                    : "Not available",
+        };
+    };
+
+    return {
+        loading,
+        error,
+        clearError,
+        getAllCharacters,
+        getCharacter,
+        getAllComics,
+    };
+};
+
+export default useMarvelService;

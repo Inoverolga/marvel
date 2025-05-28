@@ -1,6 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Component } from "react";
-
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import "@fontsource/roboto-condensed";
 import "@fontsource/roboto-condensed/400.css"; // Specify weight
 import "@fontsource/roboto-condensed/400-italic.css";
@@ -20,113 +19,93 @@ import decoration from "../../components/resourses/img/vision.png";
 import "../../index.scss";
 import "./app.scss";
 
-class App extends Component {
-    state = {
-        selectedChar: null,
-    };
+const App = () => {
+    const [selectedChar, setChar] = useState(null);
+    const [selectedComics, setSelectedComics] = useState(null);
 
-    onCharSelected = (id) => {
+    const onCharSelected = (id) => {
         //метод для установки свойства selectedChar
-        this.setState({
-            selectedChar: id,
-        });
+        setChar(id);
     };
 
-    render() {
-        return (
-            <Router>
-                <div className="app">
-                    {/* <AppHeader /> */}
-                    {/* Вынесено за Routes, если должно отображаться всегда */}
-                    <main>
-                        <Routes>
-                            <Route
-                                path="/"
-                                element={
-                                    <>
-                                        <AppHeader />
+    const onSelectedComics = (id) => {
+        setSelectedComics(id);
+    };
+
+    return (
+        <Router>
+            <div className="app">
+                {/* <AppHeader /> */}
+                {/* Вынесено за Routes, если должно отображаться всегда */}
+                <main>
+                    <Routes>
+                        <Route
+                            path="/"
+                            element={
+                                <>
+                                    <AppHeader />
+                                    <ErrorBoundary>
+                                        <RandomChar />
+                                    </ErrorBoundary>
+
+                                    <div className="char__content">
                                         <ErrorBoundary>
-                                            <RandomChar />
+                                            <CharList
+                                                onCharSelected={onCharSelected}
+                                            />
                                         </ErrorBoundary>
 
-                                        <div className="char__content">
+                                        <div className="char__content-forma">
                                             <ErrorBoundary>
-                                                <CharList
-                                                    onCharSelected={
-                                                        this.onCharSelected
-                                                    }
+                                                <CharInfo
+                                                    charId={selectedChar} //передаем то, что сохранили в состоянии (т.е id)
                                                 />
                                             </ErrorBoundary>
-
-                                            <div className="char__content-forma">
-                                                <ErrorBoundary>
-                                                    <CharInfo
-                                                        charId={
-                                                            this.state
-                                                                .selectedChar
-                                                        } //передаем то, что сохранили в состоянии (т.е id)
-                                                    />
-                                                </ErrorBoundary>
-                                                <AppForm
-                                                    style={{
-                                                        visibility: "hidden",
-                                                    }}
-                                                />
-                                            </div>
+                                            <AppForm
+                                                style={{
+                                                    visibility: "hidden",
+                                                }}
+                                            />
                                         </div>
-                                        <img
-                                            className="bg-decoration"
-                                            src={decoration}
-                                            alt="vision"
-                                        />
-                                    </>
-                                }
-                            />
-                            {/* <Route
-                                path="/loadmore"
-                                element={
-                                    <>
-                                        <AppHeader />
-                                        <RandomChar />
-                                        <div className="char__content">
-                                            <CharList />
-                                            <Skeleton />
-                                        </div>
-                                        <img
-                                            className="bg-decoration"
-                                            src={decoration}
-                                            alt="vision"
-                                        />
-                                    </>
-                                }
-                            /> */}
+                                    </div>
+                                    <img
+                                        className="bg-decoration"
+                                        src={decoration}
+                                        alt="vision"
+                                    />
+                                </>
+                            }
+                        />
 
-                            <Route
-                                path="/comics"
-                                element={
-                                    <>
-                                        <AppHeader />
-                                        <AppBanner />
-                                        <AppComics />
-                                    </>
-                                }
-                            />
+                        <Route
+                            path="/comics"
+                            element={
+                                <>
+                                    <AppHeader />
+                                    <AppBanner />
+                                    <ErrorBoundary>
+                                        <AppComics
+                                            onSelectedComics={onSelectedComics}
+                                        />
+                                    </ErrorBoundary>
+                                </>
+                            }
+                        />
 
-                            <Route
-                                path="/comicsitem"
-                                element={
-                                    <>
-                                        <AppHeader />
-                                        <AppBanner />
-                                        <SingleComic />
-                                    </>
-                                }
-                            />
-                        </Routes>
-                    </main>
-                </div>
-            </Router>
-        );
-    }
-}
+                        <Route
+                            path="/comicsitem"
+                            element={
+                                <>
+                                    <AppHeader />
+                                    <AppBanner />
+                                    <SingleComic comicsId={selectedComics} />
+                                </>
+                            }
+                        />
+                    </Routes>
+                </main>
+            </div>
+        </Router>
+    );
+};
 export default App;
