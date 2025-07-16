@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/marvel/static/css/main.616a4cc3.css",
-    "main.js": "/marvel/static/js/main.60ae849f.js",
+    "main.js": "/marvel/static/js/main.92c3394c.js",
     "static/js/699.c8409651.chunk.js": "/marvel/static/js/699.c8409651.chunk.js",
     "static/css/888.536fa792.chunk.css": "/marvel/static/css/888.536fa792.chunk.css",
     "static/js/888.0f2d008c.chunk.js": "/marvel/static/js/888.0f2d008c.chunk.js",
@@ -60,7 +60,7 @@
     "static/media/roboto-condensed-greek-ext-700-normal.woff": "/marvel/static/media/roboto-condensed-greek-ext-700-normal.e916823b47874a6d3a39.woff",
     "index.html": "/marvel/index.html",
     "main.616a4cc3.css.map": "/marvel/static/css/main.616a4cc3.css.map",
-    "main.60ae849f.js.map": "/marvel/static/js/main.60ae849f.js.map",
+    "main.92c3394c.js.map": "/marvel/static/js/main.92c3394c.js.map",
     "699.c8409651.chunk.js.map": "/marvel/static/js/699.c8409651.chunk.js.map",
     "888.536fa792.chunk.css.map": "/marvel/static/css/888.536fa792.chunk.css.map",
     "888.0f2d008c.chunk.js.map": "/marvel/static/js/888.0f2d008c.chunk.js.map",
@@ -72,6 +72,6 @@
   },
   "entrypoints": [
     "static/css/main.616a4cc3.css",
-    "static/js/main.60ae849f.js"
+    "static/js/main.92c3394c.js"
   ]
 }
